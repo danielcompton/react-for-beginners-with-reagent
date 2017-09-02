@@ -25,9 +25,7 @@
    You can use 'profile-tasks' like `production` and `development`
    to change parameters (like optimizations level of the cljs compiler)"
   []
-  (comp (speak)
-        
-        (cljs)
+  (comp (cljs)
         ))
 
 (deftask run
@@ -49,7 +47,7 @@
 
 (deftask development []
   (task-options! cljs {:optimizations :none}
-                 reload {:on-jsload 'react-for-beginners-with-reagent.app/init})
+                 reload {:on-jsload 'reagent-for-beginners.app/init})
   identity)
 
 (deftask dev

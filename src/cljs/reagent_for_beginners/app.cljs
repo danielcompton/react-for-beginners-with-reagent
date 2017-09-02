@@ -1,4 +1,4 @@
-(ns reagent-for-beginners.app
+(ns react-for-beginners-with-reagent.app
   (:require [reagent.core :as reagent :refer [atom]]))
 
 (defn some-component []
