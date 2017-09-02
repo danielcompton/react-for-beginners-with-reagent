@@ -1,0 +1,3 @@
+{:require  [react-for-beginners-with-reagent.app]
+ :init-fns [react-for-beginners-with-reagent.app/init]
+ :compiler-options {:asset-path "js/app.out"}}
