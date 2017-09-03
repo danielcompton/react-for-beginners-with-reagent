@@ -1,18 +1,14 @@
-(ns react-for-beginners-with-reagent.app
-  (:require [reagent.core :as reagent :refer [atom]]))
+(ns reagent-for-beginners.app
+  (:require [reagent.core :as reagent :refer [atom]]
+            [reagent-for-beginners.components.header :as header]))
 
-(defn some-component []
-  [:div
-   [:h3 "I am a component!"]
-   [:p.someclass
-    "I have " [:strong "bold"]
-    [:span {:style {:color "red"}} " and red"]
-    " text."]])
-
-(defn calling-component []
-  [:div "Parent component"
-   [some-component]])
+(defn catch-of-the-day []
+  [:div.catch-of-the-day
+   [:div.menu
+    [header/component "Fresh seafood"]]])
 
 (defn init []
-  (reagent/render-component [calling-component]
-                            (.getElementById js/document "container")))
+  (reagent/render-component [catch-of-the-day]
+                            (.getElementById js/document "main")))
+
+
