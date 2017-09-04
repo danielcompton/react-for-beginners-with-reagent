@@ -20,7 +20,7 @@
                           :price price
                           :status status
                           :description description
-                          :image :image}))))
+                          :image image}))))
 
 (defn component []
   (let [default {:name "" :price 0 :status "available" :description "" :image ""}

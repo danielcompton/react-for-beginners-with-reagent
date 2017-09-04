@@ -11,5 +11,5 @@
     [:span.price price]]
    [:p desc]
    [:button {:disabled (if (= status "available") false true)
-             :on-click #(add-to-order state/orders order default)}
+             :on-click #(add-to-order @state/orders order default)}
     (if (= status "available") "Add To Order" "Sold Out!")]])
