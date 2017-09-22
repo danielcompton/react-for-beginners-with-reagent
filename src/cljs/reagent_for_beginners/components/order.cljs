@@ -1,16 +1,18 @@
 (ns reagent-for-beginners.components.order
   (:require [reagent-for-beginners.state :as state]))
 
-(defn order [[id quantity]]
+(defn order [orders]
   [:li
-    [:span quantity "order" id]
-    [:span.price quantity]])
+    [:span "order"]
+    [:span.price "price"]])
 
 (defn component []
   [:div.order-wrap
    [:h2 "Your Order"]
    [:ul.order
-    (for [{:keys [id quantity]} @state/orders]
-      ^{:key id} [order id quantity])]
-    
+    [order ]
+    (map first @state/orders)
+    (reduce + (map second @state/orders))]
    [:strong "Total:"]])
+
+
