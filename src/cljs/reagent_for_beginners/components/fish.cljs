@@ -1,5 +1,6 @@
 (ns reagent-for-beginners.components.fish
-  (:require [reagent-for-beginners.state :as state]))
+  (:require [reagent-for-beginners.state :as state]
+            [reagent-for-beginners.helpers :as h]))
 
 (defn add-to-order [orders order]
   (if (contains? @orders (keyword order))
@@ -10,7 +11,7 @@
   [:li.menu-fish
    [:img {:src image :alt name}]
    [:h3.fish-name name
-    [:span.price price]]
+    [:span.price (h/format-price price)]]
    [:p desc]
    [:button {:disabled (if (= status "available") false true)
              :on-click #(add-to-order state/orders id)}
