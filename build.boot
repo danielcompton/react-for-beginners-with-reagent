@@ -26,8 +26,7 @@
    You can use 'profile-tasks' like `production` and `development`
    to change parameters (like optimizations level of the cljs compiler)"
   []
-  (comp (cljs)
-        ))
+  (comp (cljs)))
 
 (deftask run
   "The `run` task wraps the building of your application in some
@@ -50,6 +49,7 @@
   (task-options! cljs {:optimizations :none}
                  reload {:on-jsload 'reagent-for-beginners.app/init})
   identity)
+
 
 (deftask dev
   "Simple alias to run application in development mode"

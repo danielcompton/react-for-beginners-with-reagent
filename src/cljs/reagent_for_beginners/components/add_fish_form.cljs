@@ -8,22 +8,22 @@
         price (trim (:price @fish))
         status (trim (:status @fish))
         image (trim (:image @fish))
-        description (trim (:description @fish))]
-    (reset! fish default)
+        desc (trim (:desc @fish))]
+     (reset! fish default)
     (when-not (or (blank? name)
                   (blank? price)
                   (blank? status)
-                  (blank? description)
+                  (blank? desc)
                   (blank? image))
       (swap! fishes conj {:id (.getTime (js/Date.))
                           :name name
                           :price price
                           :status status
-                          :description description
+                          :desc desc
                           :image image}))))
 
 (defn component []
-  (let [default {:name "" :price 0 :status "available" :description "" :image ""}
+  (let [default {:name "" :price 0 :status "available" :desc "" :image ""}
         fish (r/atom default)]
     (fn []
       [:form.fish-edit
@@ -40,8 +40,8 @@
         [:option {:value "available"} "Fresh!"]
         [:option {:value "unavailable"} "Sold Out!"]]
        [:textarea {:placeholder "Fish Desc"
-                   :on-change #(swap! fish assoc :description (-> % .-target .-value))
-                   :value (:description @fish)}]
+                   :on-change #(swap! fish assoc :desc (-> % .-target .-value))
+                   :value (:desc @fish)}]
        [:input {:type "text"
                 :placeholder "Fish Image"
                 :value (:image @fish)
