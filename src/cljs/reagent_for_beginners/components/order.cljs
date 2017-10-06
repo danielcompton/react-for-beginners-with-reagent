@@ -5,10 +5,19 @@
 
 
 (defn order [id quant]
-  (.log js/console id quant)
   [:li
     [:span id]
     [:span.price quant]])
+
+(defn total []
+  (h/format-price (reduce (fn [prev key]
+            (let [fish @state/id-fishes
+                  count (key @state/orders)
+                  is-available (fish @state/id-fishes)]
+              (if true
+                (+ prev (* count (get (key @state/id-fishes) :price 1)))
+              prev)))
+          0 (keys @state/orders))))
 
 (defn component []
   [:div.order-wrap
@@ -17,11 +26,6 @@
     (for [[id quant] @state/orders]
       ^{:key id} [order id quant])
     [:li.total
-     ;; (.log js/console @state/fishes)
-     ;; (.log js/console @state/orders)
-     
-    ;; (map first @state/orders)
-     [:strong "Total:" (h/format-price
-                        (* ((first @state/fishes) :price)(reduce + (map second @state/orders))))]]]])
+     [:strong "Total:" (total)]]]])
 
 
