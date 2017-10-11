@@ -4,8 +4,8 @@
 
 (defn order [id quant]
   [:li
-    [:span id]
-    [:span.price quant]])
+    [:span quant "lbs " (get (id @state/id-fishes) :name)]
+    [:span.price (h/format-price (* quant (get (id @state/id-fishes) :price)))]])
 
 (defn total []
   (h/format-price (reduce (fn [prev key]
@@ -25,4 +25,3 @@
       ^{:key id} [order id quant])
     [:li.total
      [:strong "Total:" (total)]]]])
-
