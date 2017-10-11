@@ -4,16 +4,16 @@
 
 (defn order [id quant]
   [:li
-    [:span quant "lbs " (get (id @state/id-fishes) :name)]
-    [:span.price (h/format-price (* quant (get (id @state/id-fishes) :price)))]])
+    [:span quant "lbs "(-> @state/id-fishes id :name)]
+    [:span.price (h/format-price (* quant (-> @state/id-fishes id :price)))]])
 
 (defn total []
   (h/format-price (reduce (fn [prev key]
                             (let [fish @state/id-fishes
                                   count (key @state/orders)
                                   is-available (fish @state/id-fishes)]
-                              (if (= (get (key @state/id-fishes) :status) "available")
-                                (+ prev (* count (get (key @state/id-fishes) :price 1)))
+                              (if (= (-> @state/id-fishes key :status) "available")
+                                (+ prev (* count (-> @state/id-fishes key :price)))
                                 prev)))
                           0 (keys @state/orders))))
 
@@ -24,4 +24,4 @@
     (for [[id quant] @state/orders]
       ^{:key id} [order id quant])
     [:li.total
-     [:strong "Total:" (total)]]]])
+     [:strong "Total:"]  (total)]]])

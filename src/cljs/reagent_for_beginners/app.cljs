@@ -22,4 +22,3 @@
 (defn init []
   (reagent/render-component [catch-of-the-day]
                             (.getElementById js/document "main")))
-
