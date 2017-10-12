@@ -15,15 +15,16 @@
                   (blank? status)
                   (blank? desc)
                   (blank? image))
-      (swap! fishes conj {:id (.getTime (js/Date.))
+      (swap! fishes conj {(keyword (str "fish-" (.now js/Date))) {:id (keyword (str "fish-" (.now js/Date)))
                           :name name
                           :price price
                           :status status
                           :desc desc
-                          :image image}))))
+                          :image image}}))))
 
 (defn component []
-  (let [default {:name "" :price 0 :status "available" :desc "" :image ""}
+  (.log js/console @state/fishes)
+  (let [default {:id "" :name "" :price 0 :status "available" :desc "" :image ""}
         fish (r/atom default)]
     (fn []
       [:form.fish-edit

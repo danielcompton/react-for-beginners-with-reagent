@@ -14,7 +14,7 @@
    [:div.menu
     [header/component "Fresh seafood"]
     [:ul.list-of-fishes
-     (for [{:keys [id name price status desc image]} @state/fishes]
+     (for [{:keys [id name price status desc image]} (vals @state/fishes)]
        ^{:key id} [fish/component id name price status image desc])]]
    [order/component]
    [inventory/component]])
