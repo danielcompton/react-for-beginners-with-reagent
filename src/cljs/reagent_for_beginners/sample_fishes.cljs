@@ -1,22 +1,26 @@
 (ns reagent-for-beginners.sample-fishes
   (:require [reagent.core :as r :refer [atom]]))
 
-(def fishes (r/atom {:fish-1 {:desc "Everyones favorite white fish. We will cut it to the size you need and ship it."
+(def fishes (r/atom {:fish-1 {:id "fish-1"
+                                 :desc "Everyones favorite white fish. We will cut it to the size you need and ship it."
                                  :image "https://i.istockimg.com/file_thumbview_approve/36248396/5/stock-photo-36248396-blackened-cajun-sea-bass.jpg"
                                  :name "Pacific Halibut"
                                  :price 1724
                                  :status "available"}
-                        :fish-2 {:desc "These tender, mouth-watering beauties are a fantastic hit at any dinner party."
+                        :fish-2 {:id "fish-2"
+                                 :desc "These tender, mouth-watering beauties are a fantastic hit at any dinner party."
                                  :image "https://i.istockimg.com/file_thumbview_approve/32135274/5/stock-photo-32135274-cooked-lobster.jpg"
                                  :name "Lobster"
                                  :price 3200
                                  :status "available"}
-                        :fish-3 {:desc "Big, sweet and tender. True dry-pack scallops from the icey waters of Alaska. About 8-10 per pound"
+                        :fish-3 {:id "fish-3"
+                                 :desc "Big, sweet and tender. True dry-pack scallops from the icey waters of Alaska. About 8-10 per pound"
                                  :image "https://i.istockimg.com/file_thumbview_approve/58624176/5/stock-photo-58624176-scallops-on-black-stone-plate.jpg"
                                  :name "Sea Scallops"
                                  :price 1684
                                  :status "unavailable"}
-                        :fish-4 {:desc "Lean flesh with a mild, sweet flavor profile, moderately firm texture and large, moist flakes."
+                        :fish-4 {:id "fish-4"
+                                 :desc "Lean flesh with a mild, sweet flavor profile, moderately firm texture and large, moist flakes."
                                  :image "https://i.istockimg.com/file_thumbview_approve/12556651/5/stock-photo-12556651-mahimahi.jpg"
                                  :name "Mahi Mahi"
                                  :price 1129

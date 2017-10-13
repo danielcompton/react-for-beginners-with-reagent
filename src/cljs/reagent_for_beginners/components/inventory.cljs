@@ -1,8 +1,10 @@
 (ns reagent-for-beginners.components.inventory
-  (:require [reagent-for-beginners.components.add-fish-form :as add-fish-form]))
+  (:require [reagent-for-beginners.components.add-fish-form :as add-fish-form]
+            [reagent-for-beginners.state :as state]
+            [reagent-for-beginners.sample-fishes :as sample-fishes]))
 
 (defn load-samples []
-  (.log js/console "Load Samples"))
+  (swap! state/fishes conj @sample-fishes/fishes ))
 
 (defn component []
   [:div
