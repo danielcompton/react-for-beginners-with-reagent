@@ -23,7 +23,6 @@
                           :image image}}))))
 
 (defn component []
-  (.log js/console @state/fishes)
   (let [default {:id "" :name "" :price 0 :status "available" :desc "" :image ""}
         fish (r/atom default)]
     (fn []

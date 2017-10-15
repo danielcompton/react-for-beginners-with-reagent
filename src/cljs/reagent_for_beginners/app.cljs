@@ -1,13 +1,24 @@
 (ns reagent-for-beginners.app
+  (:require-macros [secretary.core :refer [defroute]])
+  (:import goog.History)
   (:require [reagent.core :as reagent :refer [atom]]
+            [reagent.session :as session]
+            [secretary.core :as secretary :include-macros true]
+            [goog.events :as events]
+            [goog.history.EventType :as HistoryEventType]
             [reagent-for-beginners.components.header :as header]
             [reagent-for-beginners.components.order :as order]
             [reagent-for-beginners.components.inventory :as inventory]
             [reagent-for-beginners.components.fish :as fish]
+            [reagent-for-beginners.components.not-found :as not-found]
+            [reagent-for-beginners.components.store-picker :as store-picker]
             [reagent-for-beginners.state :as state]))
 
-(defonce app-state (reagent/atom {:fishes (sorted-map)
-                                  :orders (sorted-map)}))
+(defonce app-state (reagent/atom {:current-page store-picker/component}))
+
+(defn page []
+  [:div
+   [(session/get :current-page)]])
 
 (defn catch-of-the-day []
   [:div.catch-of-the-day
@@ -19,6 +30,27 @@
    [order/component]
    [inventory/component]])
 
+;; Routes
+
+(defroute "/" []
+  (session/put! :current-page store-picker/component))
+
+(defroute "/store" []
+  (session/put! :current-page catch-of-the-day))
+
+;; History
+
+(defn hook-browser-navigation! []
+  (doto (History.)
+    (events/listen
+     HistoryEventType/NAVIGATE
+     (fn [event]
+       (secretary/dispatch! (.-token event))))
+    (.setEnabled true)))
+
+(defn mount-components []
+  (reagent/render-component [page] (.getElementById js/document "main")))
+
 (defn init []
-  (reagent/render-component [catch-of-the-day]
-                            (.getElementById js/document "main")))
+  ;; (hook-browser-navigation!)
+  (mount-components))

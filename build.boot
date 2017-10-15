@@ -10,7 +10,10 @@
                  [weasel                    "0.7.0"      :scope "test"]
                  [org.clojure/clojurescript "1.9.562"]
                  [reagent "0.6.0"]
+                 [reagent-utils "0.2.1"]
+                 [bidi "2.1.2"]
                  [secretary "1.2.3"]
+                 [venantius/accountant "0.2.0"]
                  [binaryage/devtools "0.9.4" :scope "test"]
                  [powerlaces/boot-cljs-devtools "0.2.0" :scope "test"]])
 
