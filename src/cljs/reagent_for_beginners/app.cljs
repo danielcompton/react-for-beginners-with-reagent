@@ -49,7 +49,7 @@
     (.setEnabled true)))
 
 (defn mount-components []
-  (reagent/render-component [page] (.getElementById js/document "main")))
+  (reagent/render-component [catch-of-the-day] (.getElementById js/document "main")))
 
 (defn init []
   ;; (hook-browser-navigation!)
