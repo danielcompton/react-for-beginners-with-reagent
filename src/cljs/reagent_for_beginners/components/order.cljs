@@ -6,9 +6,15 @@
   [:button {:on-click #(swap! state/orders dissoc id)} " \u00D7"])
 
 (defn order [id quant]
-  [:li
-   [:span quant "lbs "(-> @state/fishes id :name) [remove-from-order id]]
-   [:span.price (h/format-price (* quant (-> @state/fishes id :price)))]])
+  (if (= (-> @state/fishes id :status) "available")
+    [:li
+     [:span quant "lbs "(-> @state/fishes id :name) [remove-from-order id]]
+     [:span.price (h/format-price (* quant (-> @state/fishes id :price)))]]
+    [:li
+     [:span (str "Sorry, " (if (-> @state/fishes id :name)
+                             (-> @state/fishes id :name)
+                             "fish")
+                 " no longer available") [remove-from-order]]]))
 
 (defn total []
   (h/format-price (reduce (fn [prev key]
