@@ -31,7 +31,8 @@
             :name "image"
             :placeholder "Fish Image"
             :value image
-            :on-change #(swap! state/fishes assoc-in [(keyword id) :image] (-> % .-target.value))}]])
+            :on-change #(swap! state/fishes assoc-in [(keyword id) :image] (-> % .-target.value))}]
+   [:button {:on-click #(swap! state/fishes dissoc (keyword id))} "Remove Fish"]])
 
 
 (defn component []
