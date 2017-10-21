@@ -2,10 +2,13 @@
   (:require [reagent-for-beginners.state :as state]
             [reagent-for-beginners.helpers :as h]))
 
+(defn remove-from-order [id]
+  [:button {:on-click #(swap! state/orders dissoc id)} " \u00D7"])
+
 (defn order [id quant]
   [:li
-    [:span quant "lbs "(-> @state/fishes id :name)]
-    [:span.price (h/format-price (* quant (-> @state/fishes id :price)))]])
+   [:span quant "lbs "(-> @state/fishes id :name) [remove-from-order id]]
+   [:span.price (h/format-price (* quant (-> @state/fishes id :price)))]])
 
 (defn total []
   (h/format-price (reduce (fn [prev key]
