@@ -19,8 +19,7 @@
 (defn total []
   (h/format-price (reduce (fn [prev key]
                             (let [fish @state/fishes
-                                  count (key @state/orders)
-                                  is-available (fish @state/fishes)]
+                                  count (key @state/orders)]
                               (if (= (-> @state/fishes key :status) "available")
                                 (+ prev (* count (-> @state/fishes key :price)))
                                 prev)))
