@@ -1,7 +1,7 @@
 (ns reagent-for-beginners.app
   (:require-macros [secretary.core :refer [defroute]])
   (:import goog.History)
-  (:require [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as r :refer [atom]]
             [reagent.session :as session]
             [secretary.core :as secretary :include-macros true]
             [goog.events :as events]
@@ -14,7 +14,7 @@
             [reagent-for-beginners.components.store-picker :as store-picker]
             [reagent-for-beginners.state :as state]))
 
-(defonce app-state (reagent/atom {:current-page store-picker/component}))
+(defonce app-state (r/atom {:current-page store-picker/component}))
 
 (defn page []
   [:div
@@ -25,8 +25,10 @@
    [:div.menu
     [header/component "Fresh seafood"]
     [:ul.list-of-fishes
+     (map (fn [{:keys [id name price status desc image]}]
+            ^{:key id} [fish/component id name price status desc image]) (vals @state/fishes))
      (for [{:keys [id name price status desc image]} (vals @state/fishes)]
-       ^{:key id} [fish/component id name price status image desc])]]
+       ^{:key id} [fish/component id name price status desc image])]]
    [order/component]
    [inventory/component]])
 
@@ -49,7 +51,7 @@
     (.setEnabled true)))
 
 (defn mount-components []
-  (reagent/render-component [catch-of-the-day] (.getElementById js/document "main")))
+  (r/render-component [catch-of-the-day] (.getElementById js/document "main")))
 
 (defn init []
   ;; (hook-browser-navigation!)

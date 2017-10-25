@@ -7,8 +7,8 @@
     (swap! orders conj (update-in @orders [(keyword order)] inc))
     (swap! orders conj {(keyword order) 1})))
 
-(defn component [id name price status image desc]
-  [:li.menu-fish
+(defn component [id name price status desc image]
+  [:li.menu-fish {:key id}
    [:img {:src image :alt name}]
    [:h3.fish-name name
     [:span.price (h/format-price price)]]
