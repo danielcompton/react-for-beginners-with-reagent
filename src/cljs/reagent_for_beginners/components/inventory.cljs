@@ -4,7 +4,7 @@
             [reagent-for-beginners.sample-fishes :as sample-fishes]))
 
 (defn load-samples []
-  (swap! state/fishes conj @sample-fishes/fishes ))
+  (swap! state/fishes conj @sample-fishes/fishes))
 
 (defn inventory [id name price status image desc]
   [:div.fish-edit

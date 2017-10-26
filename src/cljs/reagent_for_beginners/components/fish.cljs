@@ -2,10 +2,8 @@
   (:require [reagent-for-beginners.state :as state]
             [reagent-for-beginners.helpers :as h]))
 
-(defn add-to-order [orders order]
-  (if (contains? @orders (keyword order))
-    (swap! orders conj (update-in @orders [(keyword order)] inc))
-    (swap! orders conj {(keyword order) 1})))
+(defn add-to-order [orders id]
+  (swap! orders update (keyword id) (fnil inc 0)))
 
 (defn component [id name price status desc image]
   [:li.menu-fish {:key id}
@@ -13,6 +11,6 @@
    [:h3.fish-name name
     [:span.price (h/format-price price)]]
    [:p desc]
-   [:button {:disabled (if (= status "available") false true)
+   [:button {:disabled (= status "unavailable")
              :on-click #(add-to-order state/orders id)}
     (if (= status "available") "Add To Order" "Sold Out!")]])

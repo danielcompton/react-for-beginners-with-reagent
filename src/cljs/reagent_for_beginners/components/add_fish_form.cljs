@@ -15,12 +15,13 @@
                   (blank? status)
                   (blank? desc)
                   (blank? image))
-      (swap! fishes conj {(keyword (str "fish-" (.now js/Date))) {:id (keyword (str "fish-" (.now js/Date)))
-                          :name name
-                          :price price
-                          :status status
-                          :desc desc
-                          :image image}}))))
+      (swap! fishes conj {(keyword (str "fish-" (.now js/Date)))
+                          {:id     (keyword (str "fish-" (.now js/Date)))
+                           :name   name
+                           :price  price
+                           :status status
+                           :desc   desc
+                           :image  image}}))))
 
 (defn component []
   (let [default {:id "" :name "" :price 0 :status "available" :desc "" :image ""}
